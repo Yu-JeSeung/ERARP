@@ -21,7 +21,8 @@ n_data.sort_index(inplace=True)
 n_data.columns = ['국가명', '금액']
 
 # 수정된 파일 덮어쓰기
-# n_data.to_csv('data/exchange_rates_2024-02-15.csv', index=False)
+n_data.to_csv('data/exchange_rates_2024-02-19.csv', index=False)
 
+# 결과
 print(n_data)
 
