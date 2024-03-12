@@ -40,14 +40,15 @@ for file_name in csv_files:
     mse = mean_squared_error(y_test, y_pred)
 
 
+# 테스트
+input_country = '홍콩 HKD'  # 예측하고 싶은 국가명
 
-# # 테스트
-# input_country = '미국 USD'  # 예측하고 싶은 국가명
-# test_data = pd.DataFrame([[0] * len(X.columns)], columns=X.columns)
+# 새로운 데이터 생성
+test_data = pd.DataFrame([[0] * (len(X.columns) - 1)], columns=X.columns[:-1])
 
-# # 국가명 인코딩
-# test_data[f'국가명_{input_country}'] = 1
+# 입력된 국가명에 해당하는 열 추가
+test_data[f'국가명_{input_country}'] = 1
 
-# # 예측
-# predicted_rate = model.predict(test_data)
-# print(f'{input_country} 의 예상 환율: {predicted_rate[0]}')
+# 예측
+predicted_rate = model.predict(test_data)
+print(f'{input_country}의 예상 환율: {predicted_rate[0]}')
