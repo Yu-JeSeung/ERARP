@@ -22,9 +22,9 @@ for file_name in csv_files:
     data = pd.read_csv(file_path)
     
     # 데이터 전처리
-    data['금액'] = data['금액'].str.replace(',', '').astype(float)
+    data['금액'] = data['금액'].str.replace(',', '').astype(float)  # 쉼표 제거 후 실수형으로 변환
     data_encoded = pd.get_dummies(data, columns=['국가명'])
-    print(data_encoded)
+    
     # 특성과 타겟 데이터 분리
     X = data_encoded.drop(columns=['금액'])
     y = data_encoded['금액']
@@ -40,15 +40,15 @@ for file_name in csv_files:
     mse = mean_squared_error(y_test, y_pred)
 
 
-# 테스트
-input_country = '홍콩 HKD'  # 예측하고 싶은 국가명
+# 입력값 설정
+input_country = input("예측하고 싶은 국가명을 입력하세요 (예: 미국 USD): ")
+#미국 USD, 유럽연합 EUR, 일본 JPY (100엔), 홍콩 HKD, 대만 TWD
 
-# 새로운 데이터 생성
-test_data = pd.DataFrame([[0] * (len(X.columns) - 1)], columns=X.columns[:-1])
+# 입력된 국가명에 해당하는 열 검색
+input_data = data_encoded[data_encoded[f'국가명_{input_country}'] == 1].drop(columns=['금액'])
 
-# 입력된 국가명에 해당하는 열 추가
-test_data[f'국가명_{input_country}'] = 1
+# 결과 예측
+predicted_rate = model.predict(input_data)
 
-# 예측
-predicted_rate = model.predict(test_data)
+# 예측 결과 출력
 print(f'{input_country}의 예상 환율: {predicted_rate[0]}')
