@@ -55,7 +55,7 @@ def crawl_and_modify_exchange_rates():
         n_data = n_data.iloc[:, :2]
 
         # 데이터가 너무 많으니 4행까지만 남기기
-        n_data.drop(index=n_data.index[5:], inplace=True)
+        # n_data.drop(index=n_data.index[5:], inplace=True)
 
         # 미국 값을 저장
         usd_value = n_data.iloc[0, 1]
