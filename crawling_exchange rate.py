@@ -7,7 +7,7 @@ import pandas as pd
 
 def crawl_and_modify_exchange_rates():
     # 오늘 날짜 로드
-    today = datetime.now().strftime('%Y-%m-%d')
+    today = datetime.now().strftime('%Y-%m-%d %H')
 
     # data 폴더에 파일저장
     folder_path = 'data'
